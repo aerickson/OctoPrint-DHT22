@@ -66,7 +66,7 @@ class Dht22Plugin(octoprint.plugin.SettingsPlugin,
         #     self._logger.info("result code is %s. output: '%s'" % (rc, output))
         # self._logger.info("in doWork!!!!")
         for name, pin in self.sensors.items():
-            self.current_data[name], _humidity = Adafruit_DHT.read_retry(self.DHT_SENSOR, pin)
+            _humidity, self.current_data[name] = Adafruit_DHT.read_retry(self.DHT_SENSOR, pin)
             # self._logger.info(self.current_data[name])
 
         # import pprint
