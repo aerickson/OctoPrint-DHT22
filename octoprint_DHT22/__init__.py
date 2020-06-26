@@ -24,15 +24,11 @@ class Dht22Plugin(octoprint.plugin.SettingsPlugin,
 	##~~ SettingsPlugin mixin
 
     def __init__(self):
-
+		# type of sensor we're using
 		self.DHT_SENSOR = Adafruit_DHT.DHT22
-		# self.pins = [23, 24]
 
 		# maps sensor name to pin
 		self.sensors = {'enclosure': 23, 'external': 24}
-		# DHT_PIN = 23
-		# DHT_PIN2 = 24
-
 		self.current_data = {}
 
         self.timer = None
