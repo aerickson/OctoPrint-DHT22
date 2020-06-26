@@ -15,16 +15,7 @@ dht22_temp_arr = [0, 0]
 # 	parsed_temps.update(test3 = (random.uniform(55,57),None))
 # 	return parsed_temps
 
-def callback(comm, parsed_temps):
 
-
-	parsed_temps.update(external = (dht22_temp_arr[0], None))
-	parsed_temps.update(enclosure = (dht22_temp_arr[1], None))
-
-	# parsed_temps.update(test = (random.uniform(99,101),100))
-	# parsed_temps.update(test2 = (random.uniform(199,201),200))
-	# parsed_temps.update(test3 = (random.uniform(55,57),None))
-	return parsed_temps
 
 class Dht22Plugin(octoprint.plugin.SettingsPlugin,
                   octoprint.plugin.AssetPlugin,
@@ -47,11 +38,23 @@ class Dht22Plugin(octoprint.plugin.SettingsPlugin,
         self.timer = None
 		self.startTimer()
 
+
+	# see https://docs.octoprint.org/en/maintenance/plugins/hooks.html?highlight=octoprint%20comm%20protocol#octoprint-comm-protocol-temperatures-received
+	def callback(self, comm, parsed_temps):
+		for sensor_name, temp_value in self.current_data.items():
+			parsed_temps.update(sensor_name = (temp_value, None))
+			# parsed_temps.update(enclosure = (dht22_temp_arr[1], None))
+
+		# parsed_temps.update(test = (random.uniform(99,101),100))
+		# parsed_temps.update(test2 = (random.uniform(199,201),200))
+		# parsed_temps.update(test3 = (random.uniform(55,57),None))
+		return parsed_temps
+
+
     def doWork(self):
         # if self._settings.get(["verbose"]):
         #     self._logger.info("result code is %s. output: '%s'" % (rc, output))
-
-		for name, pin in self.sensors:
+		for name, pin in self.sensors.items():
 			self.current_data[name] = Adafruit_DHT.read_retry(self.DHT_SENSOR, pin)
 
 
@@ -118,6 +121,6 @@ def __plugin_load__():
 	global __plugin_hooks__
 	__plugin_hooks__ = {
 		"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,
-		"octoprint.comm.protocol.temperatures.received": (callback, 1)  # function and interval
+		"octoprint.comm.protocol.temperatures.received": (__plugin_implementation__.callback, 1)  # function and interval
 	}
 
