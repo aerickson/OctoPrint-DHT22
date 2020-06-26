@@ -19,7 +19,17 @@ dht22_temp_arr = [0, 0]
 
 class Dht22Plugin(octoprint.plugin.SettingsPlugin,
                   octoprint.plugin.AssetPlugin,
-                  octoprint.plugin.TemplatePlugin):
+                  octoprint.plugin.TemplatePlugin,
+                  octoprint.plugin.StartupPlugin):
+
+    def initialize(self):
+        self.startTimer()
+        pass
+
+    ##~~ StartupPlugin mixin
+
+    def on_after_startup(self):
+        pass
 
     ##~~ SettingsPlugin mixin
 
@@ -32,8 +42,6 @@ class Dht22Plugin(octoprint.plugin.SettingsPlugin,
         self.current_data = {}
 
         self.timer = None
-        self.startTimer()
-
 
     # see https://docs.octoprint.org/en/maintenance/plugins/hooks.html?highlight=octoprint%20comm%20protocol#octoprint-comm-protocol-temperatures-received
     def callback(self, comm, parsed_temps):
@@ -66,6 +74,7 @@ class Dht22Plugin(octoprint.plugin.SettingsPlugin,
             interval, self.doWork, run_first=True
         )
         self.timer.start()
+
 
     def get_settings_defaults(self):
         return dict(
