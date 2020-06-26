@@ -49,14 +49,21 @@ class Dht22Plugin(octoprint.plugin.SettingsPlugin,
         self.timer = None
 		self.startTimer()
 
+    def doWork(self):
+        # the_cmd = self._settings.get(["command"])
+        # rc, output = self.run_command(the_cmd)
+        # if self._settings.get(["verbose"]):
+        #     self._logger.info("result code is %s. output: '%s'" % (rc, output))
+		pass
+
 	def startTimer(self):
-        interval = self._settings.get_float(["interval"])
-        the_cmd = self._settings.get(["command"])
-        self._logger.info(
-            "starting timer to run command '%s' every %s seconds" % (the_cmd, interval)
-        )
+        # interval = self._settings.get_float(["interval"])
+		interval = 5
+        # self._logger.info(
+        #     "starting timer to run command '%s' every %s seconds" % (the_cmd, interval)
+        # )
         self.timer = octoprint.util.RepeatedTimer(
-            interval, self.runTimerCommand, run_first=True
+            interval, self.doWork, run_first=True
         )
         self.timer.start()
 
