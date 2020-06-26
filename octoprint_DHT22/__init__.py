@@ -65,7 +65,7 @@ class Dht22Plugin(octoprint.plugin.SettingsPlugin,
 		# for details.
 		return dict(
 			DHT22=dict(
-				displayName="Dht22 Plugin",
+				displayName="DHT22 Plugin",
 				displayVersion=self._plugin_version,
 
 				# version check: github repository
