@@ -47,7 +47,7 @@ class Dht22Plugin(octoprint.plugin.SettingsPlugin,
     def callback(self, comm, parsed_temps):
         # self._logger.info("HAHAHAHA ANDDDDDYYYYYYYYYYYY HERE")
         for sensor_name, temp_value in self.current_data.items():
-            parsed_temps.update(sensor_name = (temp_value, None))
+            parsed_temps[sensor_name] = (temp_value, None)
             # parsed_temps.update(enclosure = (dht22_temp_arr[1], None))
 
         # parsed_temps.update(test = (random.uniform(99,101),100))
@@ -59,7 +59,7 @@ class Dht22Plugin(octoprint.plugin.SettingsPlugin,
     def doWork(self):
         # if self._settings.get(["verbose"]):
         #     self._logger.info("result code is %s. output: '%s'" % (rc, output))
-        self._logger.info("in doWork!!!!")
+        # self._logger.info("in doWork!!!!")
         for name, pin in self.sensors.items():
             self.current_data[name] = Adafruit_DHT.read_retry(self.DHT_SENSOR, pin)
 
