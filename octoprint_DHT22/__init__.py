@@ -13,22 +13,32 @@ import Adafruit_DHT
 
 import octoprint.plugin
 
+dht22_temp_arr = [0, 0]
+
+# def callback(comm, parsed_temps):
+# 	parsed_temps.update(test = (random.uniform(99,101),100))
+# 	parsed_temps.update(test2 = (random.uniform(199,201),200))
+# 	parsed_temps.update(test3 = (random.uniform(55,57),None))
+# 	return parsed_temps
+
 def callback(comm, parsed_temps):
-	DHT_SENSOR = Adafruit_DHT.DHT22
+	# DHT_SENSOR = Adafruit_DHT.DHT22
 
-	DHT_PIN = 23
-	DHT_PIN2 = 24
+	# DHT_PIN = 23
+	# DHT_PIN2 = 24
 
-	h1, t1 = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
-	h2, t2 = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN2)
+	# h1, t1 = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
+	# h2, t2 = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN2)
+
+	# dht22_temp_arr = [t2, t1]
 
 	#     if h1 is not None and t1 is not None:
 	#         print("#1 enclosure: Temp={0:0.1f}*C  Humidity={1:0.1f}%".format(t1, h1))
 	#     if h2 is not None and t2 is not None: 
 	#         print("#2 external: Temp={0:0.1f}*C  Humidity={1:0.1f}%".format(t2, h2))
 
-	parsed_temps.update(external = (t2, None))
-	parsed_temps.update(enclosure = (t1, None))
+	parsed_temps.update(external = (dht22_temp_arr[0], None))
+	parsed_temps.update(enclosure = (dht22_temp_arr[1], None))
 
 	# parsed_temps.update(test = (random.uniform(99,101),100))
 	# parsed_temps.update(test2 = (random.uniform(199,201),200))
@@ -93,6 +103,6 @@ def __plugin_load__():
 	global __plugin_hooks__
 	__plugin_hooks__ = {
 		"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,
-		"octoprint.comm.protocol.temperatures.received": (callback, 10)
+		"octoprint.comm.protocol.temperatures.received": (callback, 1)
 	}
 
