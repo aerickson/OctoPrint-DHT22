@@ -37,7 +37,7 @@ class Dht22Plugin(octoprint.plugin.SettingsPlugin,
 
     # see https://docs.octoprint.org/en/maintenance/plugins/hooks.html?highlight=octoprint%20comm%20protocol#octoprint-comm-protocol-temperatures-received
     def callback(self, comm, parsed_temps):
-            self._logger.info("HAHAHAHA ANDDDDDYYYYYYYYYYYY HERE")
+        self._logger.info("HAHAHAHA ANDDDDDYYYYYYYYYYYY HERE")
         for sensor_name, temp_value in self.current_data.items():
             parsed_temps.update(sensor_name = (temp_value, None))
             # parsed_temps.update(enclosure = (dht22_temp_arr[1], None))
