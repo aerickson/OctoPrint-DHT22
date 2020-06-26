@@ -27,8 +27,8 @@ def callback(comm, parsed_temps):
 	#     if h2 is not None and t2 is not None: 
 	#         print("#2 external: Temp={0:0.1f}*C  Humidity={1:0.1f}%".format(t2, h2))
 
-	parsed_temps.update(external = (t2))
-	parsed_temps.update(enclosure = (t1))
+	parsed_temps.update(external = (t2, None))
+	parsed_temps.update(enclosure = (t1, None))
 
 	# parsed_temps.update(test = (random.uniform(99,101),100))
 	# parsed_temps.update(test2 = (random.uniform(199,201),200))
