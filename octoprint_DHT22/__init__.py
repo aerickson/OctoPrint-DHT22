@@ -53,6 +53,11 @@ class Dht22Plugin(octoprint.plugin.SettingsPlugin,
         # parsed_temps.update(test = (random.uniform(99,101),100))
         # parsed_temps.update(test2 = (random.uniform(199,201),200))
         # parsed_temps.update(test3 = (random.uniform(55,57),None))
+
+        import pprint
+        output = pprint.pformat(parsed_temps)
+        self._logger.info("HAHAHAHA %s" % output)
+
         return parsed_temps
 
 
@@ -62,6 +67,7 @@ class Dht22Plugin(octoprint.plugin.SettingsPlugin,
         # self._logger.info("in doWork!!!!")
         for name, pin in self.sensors.items():
             self.current_data[name] = Adafruit_DHT.read_retry(self.DHT_SENSOR, pin)
+            self._logger.info(self.current_data[name])
 
 
     def startTimer(self):
