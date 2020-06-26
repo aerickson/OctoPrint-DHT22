@@ -16,20 +16,7 @@ dht22_temp_arr = [0, 0]
 # 	return parsed_temps
 
 def callback(comm, parsed_temps):
-	# DHT_SENSOR = Adafruit_DHT.DHT22
 
-	# DHT_PIN = 23
-	# DHT_PIN2 = 24
-
-	# h1, t1 = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
-	# h2, t2 = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN2)
-
-	# dht22_temp_arr = [t2, t1]
-
-	#     if h1 is not None and t1 is not None:
-	#         print("#1 enclosure: Temp={0:0.1f}*C  Humidity={1:0.1f}%".format(t1, h1))
-	#     if h2 is not None and t2 is not None: 
-	#         print("#2 external: Temp={0:0.1f}*C  Humidity={1:0.1f}%".format(t2, h2))
 
 	parsed_temps.update(external = (dht22_temp_arr[0], None))
 	parsed_temps.update(enclosure = (dht22_temp_arr[1], None))
@@ -46,19 +33,31 @@ class Dht22Plugin(octoprint.plugin.SettingsPlugin,
 	##~~ SettingsPlugin mixin
 
     def __init__(self):
+
+		self.DHT_SENSOR = Adafruit_DHT.DHT22
+		# self.pins = [23, 24]
+
+		# maps sensor name to pin
+		self.sensors = {'enclosure': 23, 'external': 24}
+		# DHT_PIN = 23
+		# DHT_PIN2 = 24
+
+		self.current_data = {}
+
         self.timer = None
 		self.startTimer()
 
     def doWork(self):
-        # the_cmd = self._settings.get(["command"])
-        # rc, output = self.run_command(the_cmd)
         # if self._settings.get(["verbose"]):
         #     self._logger.info("result code is %s. output: '%s'" % (rc, output))
-		pass
+
+		for name, pin in self.sensors:
+			self.current_data[name] = Adafruit_DHT.read_retry(self.DHT_SENSOR, pin)
+
 
 	def startTimer(self):
         # interval = self._settings.get_float(["interval"])
-		interval = 5
+		interval = 10
         # self._logger.info(
         #     "starting timer to run command '%s' every %s seconds" % (the_cmd, interval)
         # )
