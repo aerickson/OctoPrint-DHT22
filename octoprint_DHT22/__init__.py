@@ -36,34 +36,15 @@ class Dht22Plugin(
 
     # see https://docs.octoprint.org/en/maintenance/plugins/hooks.html?highlight=octoprint%20comm%20protocol#octoprint-comm-protocol-temperatures-received
     def callback(self, comm, parsed_temps):
-        # self._logger.info("HAHAHAHA ANDDDDDYYYYYYYYYYYY HERE")
         for sensor_name, temp_value in self.current_data.items():
             parsed_temps[sensor_name] = (temp_value, None)
-            # parsed_temps.update(enclosure = (dht22_temp_arr[1], None))
-
-        # parsed_temps.update(test = (random.uniform(99,101),100))
-        # parsed_temps.update(test2 = (random.uniform(199,201),200))
-        # parsed_temps.update(test3 = (random.uniform(55,57),None))
-
-        # import pprint
-        # output = pprint.pformat(parsed_temps)
-        # self._logger.info("HAHAHAHA %s" % output)
-
         return parsed_temps
 
     def doWork(self):
-        # if self._settings.get(["verbose"]):
-        #     self._logger.info("result code is %s. output: '%s'" % (rc, output))
-        # self._logger.info("in doWork!!!!")
         for name, pin in self.sensors.items():
             _humidity, self.current_data[name] = Adafruit_DHT.read_retry(
                 self.DHT_SENSOR, pin
             )
-            # self._logger.info(self.current_data[name])
-
-        # import pprint
-        # output = pprint.pformat(self.current_data)
-        # self._logger.info("BUUUUU %s" % output)
 
     def startTimer(self):
         # interval = self._settings.get_float(["interval"])
