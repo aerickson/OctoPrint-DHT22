@@ -7,12 +7,12 @@ import octoprint.plugin
 import octoprint.util
 
 
-
-class Dht22Plugin(octoprint.plugin.SettingsPlugin,
-                  octoprint.plugin.AssetPlugin,
-                  octoprint.plugin.TemplatePlugin,
-                  octoprint.plugin.StartupPlugin):
-
+class Dht22Plugin(
+    octoprint.plugin.SettingsPlugin,
+    octoprint.plugin.AssetPlugin,
+    octoprint.plugin.TemplatePlugin,
+    octoprint.plugin.StartupPlugin,
+):
     def initialize(self):
         self.startTimer()
         pass
@@ -29,7 +29,7 @@ class Dht22Plugin(octoprint.plugin.SettingsPlugin,
         self.DHT_SENSOR = Adafruit_DHT.DHT22
 
         # maps sensor name to pin
-        self.sensors = {'enclosure': 23, 'external': 24}
+        self.sensors = {"enclosure": 23, "external": 24}
         self.current_data = {}
 
         self.timer = None
@@ -51,13 +51,14 @@ class Dht22Plugin(octoprint.plugin.SettingsPlugin,
 
         return parsed_temps
 
-
     def doWork(self):
         # if self._settings.get(["verbose"]):
         #     self._logger.info("result code is %s. output: '%s'" % (rc, output))
         # self._logger.info("in doWork!!!!")
         for name, pin in self.sensors.items():
-            _humidity, self.current_data[name] = Adafruit_DHT.read_retry(self.DHT_SENSOR, pin)
+            _humidity, self.current_data[name] = Adafruit_DHT.read_retry(
+                self.DHT_SENSOR, pin
+            )
             # self._logger.info(self.current_data[name])
 
         # import pprint
@@ -70,11 +71,8 @@ class Dht22Plugin(octoprint.plugin.SettingsPlugin,
         # self._logger.info(
         #     "starting timer to run command '%s' every %s seconds" % (the_cmd, interval)
         # )
-        self.timer = octoprint.util.RepeatedTimer(
-            interval, self.doWork, run_first=True
-        )
+        self.timer = octoprint.util.RepeatedTimer(interval, self.doWork, run_first=True)
         self.timer.start()
-
 
     def get_settings_defaults(self):
         return dict(
@@ -86,11 +84,7 @@ class Dht22Plugin(octoprint.plugin.SettingsPlugin,
     def get_assets(self):
         # Define your plugin's asset files to automatically include in the
         # core UI here.
-        return dict(
-            js=["js/DHT22.js"],
-            css=["css/DHT22.css"],
-            less=["less/DHT22.less"]
-        )
+        return dict(js=["js/DHT22.js"], css=["css/DHT22.css"], less=["less/DHT22.less"])
 
     ##~~ Softwareupdate hook
 
@@ -102,15 +96,13 @@ class Dht22Plugin(octoprint.plugin.SettingsPlugin,
             DHT22=dict(
                 displayName="DHT22 Plugin",
                 displayVersion=self._plugin_version,
-
                 # version check: github repository
                 type="github_release",
                 user="aerickson",
                 repo="OctoPrint-DHT22",
                 current=self._plugin_version,
-
                 # update method: pip
-                pip="https://github.com/aerickson/OctoPrint-DHT22/archive/{target_version}.zip"
+                pip="https://github.com/aerickson/OctoPrint-DHT22/archive/{target_version}.zip",
             )
         )
 
@@ -119,7 +111,8 @@ class Dht22Plugin(octoprint.plugin.SettingsPlugin,
 # ("OctoPrint-PluginSkeleton"), you may define that here. Same goes for the other metadata derived from setup.py that
 # can be overwritten via __plugin_xyz__ control properties. See the documentation for that.
 __plugin_name__ = "DHT22 Plugin"
-__plugin_pythoncompat__ = ">=2.7,<4" # python 2 and 3
+__plugin_pythoncompat__ = ">=2.7,<4"  # python 2 and 3
+
 
 def __plugin_load__():
     global __plugin_implementation__
@@ -129,6 +122,8 @@ def __plugin_load__():
     __plugin_hooks__ = {
         "octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,
         # https://docs.octoprint.org/en/maintenance/plugins/hooks.html?highlight=octoprint%20comm%20protocol#execution-order
-        "octoprint.comm.protocol.temperatures.received": (__plugin_implementation__.callback, 1)  # function and order
+        "octoprint.comm.protocol.temperatures.received": (
+            __plugin_implementation__.callback,
+            1,
+        ),  # function and order
     }
-
