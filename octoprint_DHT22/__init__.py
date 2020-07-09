@@ -7,15 +7,6 @@ import octoprint.plugin
 import octoprint.util
 
 
-dht22_temp_arr = [0, 0]
-
-# def callback(comm, parsed_temps):
-# 	parsed_temps.update(test = (random.uniform(99,101),100))
-# 	parsed_temps.update(test2 = (random.uniform(199,201),200))
-# 	parsed_temps.update(test3 = (random.uniform(55,57),None))
-# 	return parsed_temps
-
-
 
 class Dht22Plugin(octoprint.plugin.SettingsPlugin,
                   octoprint.plugin.AssetPlugin,
