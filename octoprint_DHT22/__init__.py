@@ -20,8 +20,8 @@ class Dht22Plugin(
     ##~~ StartupPlugin mixin
 
     def on_after_startup(self):
-        self._logger.debug(self._settings.get(["debugging_enabled"]))
-        self._logger.debug(self._settings.get(["pin_configuration"]))
+        self._logger.info(self._settings.get(["debugging_enabled"]))
+        self._logger.info(self._settings.get(["pin_configuration"]))
         pass
 
     #~~ TemplatePlugin
