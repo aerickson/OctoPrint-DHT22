@@ -69,14 +69,14 @@ class Dht22Plugin(
         # parsed_temps.update(test3 = (random.uniform(55,57),None))
         # return parsed_temps
 
-        self._logger.info("in callback")
+        # self._logger.info("in callback")
         for sensor_name, temp_value in self.current_data.items():
             parsed_temps[sensor_name] = (temp_value, None)
         return parsed_temps
 
 
     def doWork(self):
-        self._logger.info("in doWork")
+        # self._logger.info("in doWork")
         for name, sensor_obj in self.sensor_objects.items():
             try:
                 self.current_data[name] = a_device.temperature
