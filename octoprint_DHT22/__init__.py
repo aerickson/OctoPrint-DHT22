@@ -58,14 +58,17 @@ class Dht22Plugin(
         
     # see https://docs.octoprint.org/en/maintenance/plugins/hooks.html?highlight=octoprint%20comm%20protocol#octoprint-comm-protocol-temperatures-received
     def callback(self, comm, parsed_temps):
+        self._logger.info("in callback")
         for sensor_name, temp_value in self.current_data.items():
             parsed_temps[sensor_name] = (temp_value, None)
         return parsed_temps
 
     def doWork(self):
+        self._logger.info("in doWork")
         for name, sensor_obj in self.sensor_objects.items():
             try:
                 self.current_data[name] = a_device.temperature
+                self._logger.info("%s: %s" % (name, self.current_data[name]))
             except RuntimeError as error:
                 logging.error(error.args[0])
 
