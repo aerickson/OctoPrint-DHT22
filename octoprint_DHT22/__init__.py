@@ -69,7 +69,7 @@ class Dht22Plugin(
         # parsed_temps.update(test3 = (random.uniform(55,57),None))
         # return parsed_temps
 
-        # parsed_temps["clown123"] = (random.uniform(22,24),None)
+        parsed_temps.update(clown123 = (random.uniform(22,24),None))
 
         # self._logger.info("in callback")
         for sensor_name, temp_value in self.current_data.items():
