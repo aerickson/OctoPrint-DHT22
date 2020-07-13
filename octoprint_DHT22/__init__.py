@@ -69,7 +69,7 @@ class Dht22Plugin(
             try:
                 self.current_data[name] = a_device.temperature
                 self._logger.info("%s: %s" % (name, self.current_data[name]))
-            except RuntimeError as error:
+            except Exception as error:
                 logging.error(error.args[0])
 
     def startTimer(self):
