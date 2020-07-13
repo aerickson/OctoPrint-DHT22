@@ -30,7 +30,7 @@ class Dht22Plugin(
     def get_settings_defaults(self):
         return dict(
             debugging_enabled=False,
-            pin_configuration=""
+            pin_configuration="# example configuration\n# Enclosure,23\n# External,24"
         )
 
     def get_settings_restricted_paths(self):
