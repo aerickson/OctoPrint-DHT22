@@ -34,7 +34,7 @@ class Dht22Plugin(
         self.current_data = {}
         self.timer = None
 
-        for name, pin in self.sensors_objects.items():
+        for name, pin in self.sensor_objects.items():
             self.sensor_objects[name] = adafruit_dht.DHT22(pin)
         
     # see https://docs.octoprint.org/en/maintenance/plugins/hooks.html?highlight=octoprint%20comm%20protocol#octoprint-comm-protocol-temperatures-received
