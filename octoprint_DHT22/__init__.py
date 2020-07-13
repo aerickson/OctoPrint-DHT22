@@ -87,8 +87,6 @@ class Dht22Plugin(
                 user="aerickson",
                 repo="OctoPrint-DHT22",
                 current=self._plugin_version,
-                # update method: pip
-                pip="https://github.com/aerickson/OctoPrint-DHT22/archive/{target}.zip",
             )
         )
 
