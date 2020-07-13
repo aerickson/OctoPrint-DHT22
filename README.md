@@ -1,16 +1,17 @@
 # OctoPrint-DHT22
 
-**TODO:** Describe what your plugin does.
+Reads DHT22 sensors and adds the data to OctoPrint's temperature data.
 
 ## Setup
+
+Install libgpiod2.
+
+`sudo apt-get install libgpiod2`
 
 Install via the bundled [Plugin Manager](https://docs.octoprint.org/en/master/bundledplugins/pluginmanager.html)
 or manually using this URL:
 
     https://github.com/aerickson/OctoPrint-DHT22/archive/master.zip
-
-**TODO:** Describe how to install your plugin, if more needs to be done than just installing it via pip or through
-the plugin manager.
 
 ## Configuration
 
