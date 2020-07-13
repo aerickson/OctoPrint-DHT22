@@ -33,7 +33,7 @@ plugin_url = "https://github.com/aerickson/OctoPrint-DHT22"
 plugin_license = "AGPLv3"
 
 # Any additional requirements besides OctoPrint should be listed here
-plugin_requires = ["Adafruit-DHT"]
+plugin_requires = ["adafruit-circuitpython-dht"]
 
 ### --------------------------------------------------------------------------------------------------------------------
 ### More advanced options that you usually shouldn't have to touch follow after this point
