@@ -22,6 +22,10 @@ class Dht22Plugin(
     def on_after_startup(self):
         pass
 
+    #~~ TemplatePlugin
+    def get_template_configs(self):
+        return [dict(type="settings", name="DHT22", custom_bindings=False)]
+
     ##~~ SettingsPlugin mixin
 
     def __init__(self):
