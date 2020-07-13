@@ -23,10 +23,23 @@ class Dht22Plugin(
         pass
 
     #~~ TemplatePlugin
-    def get_template_configs(self):
-        return [dict(type="settings", name="DHT22", custom_bindings=False)]
+    # def get_template_configs(self):
+    #     return [dict(type="settings", custom_bindings=False)]
 
     ##~~ SettingsPlugin mixin
+        def get_settings_defaults(self):
+        return dict(
+            debugging_enabled=False,
+            pin_configuration=""
+        )
+
+    def get_settings_restricted_paths(self):
+        return dict(admin=[["debugging_enabled"], ["pin_configuration"],],
+                    user=[],
+                    never=[])
+
+    def get_settings_version(self):
+        return 1
 
     def __init__(self):
         # type of sensor we're using
