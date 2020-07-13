@@ -27,7 +27,7 @@ class Dht22Plugin(
     #     return [dict(type="settings", custom_bindings=False)]
 
     ##~~ SettingsPlugin mixin
-        def get_settings_defaults(self):
+    def get_settings_defaults(self):
         return dict(
             debugging_enabled=False,
             pin_configuration=""
