@@ -1,7 +1,8 @@
 # coding=utf-8
 from __future__ import absolute_import
 
-import Adafruit_DHT
+import board
+import adafruit_dht
 
 import octoprint.plugin
 import octoprint.util
@@ -26,14 +27,17 @@ class Dht22Plugin(
 
     def __init__(self):
         # type of sensor we're using
-        self.DHT_SENSOR = Adafruit_DHT.DHT22
+        # self.DHT_SENSOR = Adafruit_DHT.DHT22
 
         # maps sensor name to pin
         self.sensors = {"enclosure": 23, "external": 24}
+        self.sensor_objects = {}
         self.current_data = {}
-
         self.timer = None
 
+        for name, pin in self.sensors_objects.items():
+            self.sensor_objects[name] = adafruit_dht.DHT22(pin)
+        
     # see https://docs.octoprint.org/en/maintenance/plugins/hooks.html?highlight=octoprint%20comm%20protocol#octoprint-comm-protocol-temperatures-received
     def callback(self, comm, parsed_temps):
         for sensor_name, temp_value in self.current_data.items():
@@ -41,10 +45,11 @@ class Dht22Plugin(
         return parsed_temps
 
     def doWork(self):
-        for name, pin in self.sensors.items():
-            _humidity, self.current_data[name] = Adafruit_DHT.read_retry(
-                self.DHT_SENSOR, pin
-            )
+        for name, sensor_obj in self.sensor_objects.items():
+            try:
+                self.current_data[name] = a_device.temperature
+            except RuntimeError as error:
+                logging.error(error.args[0])
 
     def startTimer(self):
         # interval = self._settings.get_float(["interval"])
