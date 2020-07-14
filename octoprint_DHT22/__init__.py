@@ -23,7 +23,7 @@ class Dht22Plugin(
 
     def initialize(self):
         # TODO: do more advanced setup stuff
-        self._console_logger = logging.getLogger("octoprint.plugins.pluginmanager.console")
+        # self._console_logger = logging.getLogger("octoprint.plugins.pluginmanager.console")
 
         # self._logger.info("initialize: debugging_enabled: %s" % self._settings.get_boolean(["debugging_enabled"]))
         # self._logger.info("initialize: pin_configuration: %s" % self._settings.get(["pin_configuration"]))
@@ -33,6 +33,7 @@ class Dht22Plugin(
 
     def on_after_startup(self):
         self._logger.info("in on_after_startup")
+        self._logger.info("Hello World! (more: %s)" % self._settings.get(["pin_configuration"]))
 
         # type of sensor we're using
         # self.DHT_SENSOR = Adafruit_DHT.DHT22
