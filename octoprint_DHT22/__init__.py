@@ -23,10 +23,26 @@ class Dht22Plugin(
     ##~~ StartupPlugin mixin
 
     def on_after_startup(self):
+        self._logger.info("in on_after_startup")
+
+        # type of sensor we're using
+        # self.DHT_SENSOR = Adafruit_DHT.DHT22
+
+        # maps sensor name to pin
+        self.sensors = {"enclosure": 23, "external": 24}
+        self.sensor_objects = {}
+        self.current_data = {}
+        self.timer = None
+
+        for name, pin in self.sensor_objects.items():
+            self.sensor_objects[name] = adafruit_dht.DHT22(pin)
+            self._logger.info(self.sensor_objects[name])
         # self._logger.info("on_after_startup: %s" % pprint.pformat(self._settings))
         self._logger.info("on_after_startup: debugging_enabled: %s" % self._settings.get_boolean(["debugging_enabled"]))
         self._logger.info("on_after_startup: pin_configuration: %s" % self._settings.get(["pin_configuration"]))
         self.startTimer()
+        self._logger.info("exit on_after_startup")
+
 
     #~~ TemplatePlugin
     # def get_template_configs(self):
@@ -51,22 +67,6 @@ class Dht22Plugin(
 
     # def get_settings_version(self):
     #     return 1
-
-    def __init__(self):
-        self._logger.info("in __init__")
-        # type of sensor we're using
-        # self.DHT_SENSOR = Adafruit_DHT.DHT22
-
-        # maps sensor name to pin
-        self.sensors = {"enclosure": 23, "external": 24}
-        self.sensor_objects = {}
-        self.current_data = {}
-        self.timer = None
-
-        for name, pin in self.sensor_objects.items():
-            self.sensor_objects[name] = adafruit_dht.DHT22(pin)
-            self._logger.info(self.sensor_objects[name])
-        self._logger.info("exit __init__")
         
     # see https://docs.octoprint.org/en/maintenance/plugins/hooks.html?highlight=octoprint%20comm%20protocol#octoprint-comm-protocol-temperatures-received
     def callback(self, comm, parsed_temps):
