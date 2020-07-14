@@ -87,7 +87,7 @@ class Dht22Plugin(
         # self._logger.info("in doWork")
         for name, sensor_obj in self.sensor_objects.items():
             try:
-                self.current_data[name] = a_device.temperature
+                self.current_data[name] = sensor_obj.temperature
                 self._logger.info("%s: %s" % (name, self.current_data[name]))
             except Exception as error:
                 self._logger.info("exception: %s" % error.args[0])
