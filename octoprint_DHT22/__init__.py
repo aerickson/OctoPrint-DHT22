@@ -16,7 +16,14 @@ class Dht22Plugin(
     octoprint.plugin.TemplatePlugin,
     octoprint.plugin.StartupPlugin,
 ):
+    def __init__(self):
+        # TODO: declare stuff here, set to empty
+        pass
+
     def initialize(self):
+        # TODO: do more advanced setup stuff
+		self._console_logger = logging.getLogger("octoprint.plugins.pluginmanager.console")
+
         # self._logger.info("initialize: debugging_enabled: %s" % self._settings.get_boolean(["debugging_enabled"]))
         # self._logger.info("initialize: pin_configuration: %s" % self._settings.get(["pin_configuration"]))
         pass
