@@ -19,16 +19,14 @@ class Dht22Plugin(
     def initialize(self):
         self._logger.info("initialize: debugging_enabled: %s" % self._settings.get_boolean(["debugging_enabled"]))
         self._logger.info("initialize: pin_configuration: %s" % self._settings.get(["pin_configuration"]))
-        self.startTimer()
-        pass
 
     ##~~ StartupPlugin mixin
 
     def on_after_startup(self):
-        self._logger.info("on_after_startup: %s" % pprint.pformat(self._settings))
-        # self._logger.info("on_after_startup: debugging_enabled: %s" % self._settings.get_boolean(["debugging_enabled"]))
-        # self._logger.info("on_after_startup: pin_configuration: %s" % self._settings.get(["pin_configuration"]))
-        pass
+        # self._logger.info("on_after_startup: %s" % pprint.pformat(self._settings))
+        self._logger.info("on_after_startup: debugging_enabled: %s" % self._settings.get_boolean(["debugging_enabled"]))
+        self._logger.info("on_after_startup: pin_configuration: %s" % self._settings.get(["pin_configuration"]))
+        self.startTimer()
 
     #~~ TemplatePlugin
     # def get_template_configs(self):
@@ -37,10 +35,10 @@ class Dht22Plugin(
     ##~~ SettingsPlugin mixin
     def on_settings_save(self, data):
         self._logger.info("in on_settings_save")
-        self.logger.info(pprint.pformat(data))
-        octoprint.plugin.SettingsPlugin.on_settings_save(self, data)        
+		octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
 
     def get_settings_defaults(self):
+        self._logger.info("in get_settings_defaults")
         return dict(
             debugging_enabled=False,
             pin_configuration="Enclosure,23<br>External,24"
@@ -55,6 +53,7 @@ class Dht22Plugin(
     #     return 1
 
     def __init__(self):
+        self._logger.info("in __init__")
         # type of sensor we're using
         # self.DHT_SENSOR = Adafruit_DHT.DHT22
 
@@ -67,6 +66,7 @@ class Dht22Plugin(
         for name, pin in self.sensor_objects.items():
             self.sensor_objects[name] = adafruit_dht.DHT22(pin)
             self._logger.info(self.sensor_objects[name])
+        self._logger.info("exit __init__")
         
     # see https://docs.octoprint.org/en/maintenance/plugins/hooks.html?highlight=octoprint%20comm%20protocol#octoprint-comm-protocol-temperatures-received
     def callback(self, comm, parsed_temps):
