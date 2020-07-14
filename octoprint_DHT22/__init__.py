@@ -11,19 +11,21 @@ import octoprint.util
 
 class Dht22Plugin(
     octoprint.plugin.SettingsPlugin,
-    octoprint.plugin.AssetPlugin,
+    # octoprint.plugin.AssetPlugin,
     octoprint.plugin.TemplatePlugin,
     octoprint.plugin.StartupPlugin,
 ):
     def initialize(self):
+        self._logger.info("initialize: debugging_enabled: %s" % self._settings.get_boolean(["debugging_enabled"]))
+        self._logger.info("initialize: pin_configuration: %s" % self._settings.get(["pin_configuration"]))
         self.startTimer()
         pass
 
     ##~~ StartupPlugin mixin
 
     def on_after_startup(self):
-        self._logger.info("debugging_enabled: %s" % self._settings.get_boolean(["debugging_enabled"]))
-        self._logger.info("pin_configuration: %s" % self._settings.get(["pin_configuration"]))
+        self._logger.info("on_after_startup: debugging_enabled: %s" % self._settings.get_boolean(["debugging_enabled"]))
+        self._logger.info("on_after_startup: pin_configuration: %s" % self._settings.get(["pin_configuration"]))
         pass
 
     #~~ TemplatePlugin
@@ -33,21 +35,21 @@ class Dht22Plugin(
     ##~~ SettingsPlugin mixin
     def on_settings_save(self, data):
         self._logger.info("in on_settings_save")
-        octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
+        octoprint.plugin.SettingsPlugin.on_settings_save(self, data)        
 
     def get_settings_defaults(self):
         return dict(
             debugging_enabled=False,
-            pin_configuration="# example configuration<br>Enclosure,23<br>External,24"
+            pin_configuration="Enclosure,23<br>External,24"
         )
 
-    def get_settings_restricted_paths(self):
-        return dict(admin=[["debugging_enabled"], ["pin_configuration"],],
-                    user=[],
-                    never=[])
+    # def get_settings_restricted_paths(self):
+    #     return dict(admin=[["debugging_enabled"], ["pin_configuration"],],
+    #                 user=[],
+    #                 never=[])
 
-    def get_settings_version(self):
-        return 1
+    # def get_settings_version(self):
+    #     return 1
 
     def __init__(self):
         # type of sensor we're using
