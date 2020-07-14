@@ -88,7 +88,7 @@ class Dht22Plugin(
 
     def startTimer(self):
         # interval = self._settings.get_float(["interval"])
-        interval = 10
+        interval = 2
         # self._logger.info(
         #     "starting timer to run command '%s' every %s seconds" % (the_cmd, interval)
         # )
