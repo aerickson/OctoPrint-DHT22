@@ -4,6 +4,7 @@ from __future__ import absolute_import
 import random
 
 import adafruit_dht
+import pprint
 
 import octoprint.plugin
 import octoprint.util
@@ -24,8 +25,9 @@ class Dht22Plugin(
     ##~~ StartupPlugin mixin
 
     def on_after_startup(self):
-        self._logger.info("on_after_startup: debugging_enabled: %s" % self._settings.get_boolean(["debugging_enabled"]))
-        self._logger.info("on_after_startup: pin_configuration: %s" % self._settings.get(["pin_configuration"]))
+        self.logger.info("on_after_startup: %s" % pprint.pformat(self._settings))
+        # self._logger.info("on_after_startup: debugging_enabled: %s" % self._settings.get_boolean(["debugging_enabled"]))
+        # self._logger.info("on_after_startup: pin_configuration: %s" % self._settings.get(["pin_configuration"]))
         pass
 
     #~~ TemplatePlugin
@@ -35,6 +37,7 @@ class Dht22Plugin(
     ##~~ SettingsPlugin mixin
     def on_settings_save(self, data):
         self._logger.info("in on_settings_save")
+        self.logger.info(pprint.pformat(data))
         octoprint.plugin.SettingsPlugin.on_settings_save(self, data)        
 
     def get_settings_defaults(self):
@@ -63,6 +66,7 @@ class Dht22Plugin(
 
         for name, pin in self.sensor_objects.items():
             self.sensor_objects[name] = adafruit_dht.DHT22(pin)
+            self._logger.info(self.sensor_objects[name])
         
     # see https://docs.octoprint.org/en/maintenance/plugins/hooks.html?highlight=octoprint%20comm%20protocol#octoprint-comm-protocol-temperatures-received
     def callback(self, comm, parsed_temps):
@@ -104,10 +108,10 @@ class Dht22Plugin(
 
     ##~~ AssetPlugin mixin
 
-    def get_assets(self):
-        # Define your plugin's asset files to automatically include in the
-        # core UI here.
-        return dict(js=["js/DHT22.js"], css=["css/DHT22.css"], less=["less/DHT22.less"])
+    # def get_assets(self):
+    #     # Define your plugin's asset files to automatically include in the
+    #     # core UI here.
+    #     return dict(js=["js/DHT22.js"], css=["css/DHT22.css"], less=["less/DHT22.less"])
 
     ##~~ Softwareupdate hook
 
