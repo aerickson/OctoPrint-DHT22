@@ -34,7 +34,7 @@ class Dht22Plugin(
         self.current_data = {}
         self.timer = None
 
-        for name, pin in self.sensor_objects.items():
+        for name, pin in self.sensors.items():
             self.sensor_objects[name] = adafruit_dht.DHT22(pin)
             self._logger.info(self.sensor_objects[name])
         # self._logger.info("on_after_startup: %s" % pprint.pformat(self._settings))
