@@ -58,7 +58,7 @@ class Dht22Plugin(
         self._logger.info("in get_settings_defaults")
         return dict(
             debugging_enabled=False,
-            pin_configuration="Enclosure,23<br>External,24"
+            pin_configuration="Enclosure:23,External:24"
         )
 
     # def get_settings_restricted_paths(self):
