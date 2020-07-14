@@ -35,7 +35,7 @@ class Dht22Plugin(
     ##~~ SettingsPlugin mixin
     def on_settings_save(self, data):
         self._logger.info("in on_settings_save")
-		octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
+        octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
 
     def get_settings_defaults(self):
         self._logger.info("in get_settings_defaults")
