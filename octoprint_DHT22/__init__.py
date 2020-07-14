@@ -17,8 +17,9 @@ class Dht22Plugin(
     octoprint.plugin.StartupPlugin,
 ):
     def initialize(self):
-        self._logger.info("initialize: debugging_enabled: %s" % self._settings.get_boolean(["debugging_enabled"]))
-        self._logger.info("initialize: pin_configuration: %s" % self._settings.get(["pin_configuration"]))
+        # self._logger.info("initialize: debugging_enabled: %s" % self._settings.get_boolean(["debugging_enabled"]))
+        # self._logger.info("initialize: pin_configuration: %s" % self._settings.get(["pin_configuration"]))
+        pass
 
     ##~~ StartupPlugin mixin
 
@@ -36,7 +37,7 @@ class Dht22Plugin(
 
         for name, pin in self.sensors.items():
             self.sensor_objects[name] = adafruit_dht.DHT22(pin)
-            self._logger.info(self.sensor_objects[name])
+            # self._logger.info(self.sensor_objects[name])
         # self._logger.info("on_after_startup: %s" % pprint.pformat(self._settings))
         self._logger.info("on_after_startup: debugging_enabled: %s" % self._settings.get_boolean(["debugging_enabled"]))
         self._logger.info("on_after_startup: pin_configuration: %s" % self._settings.get(["pin_configuration"]))
@@ -88,9 +89,9 @@ class Dht22Plugin(
         for name, sensor_obj in self.sensor_objects.items():
             try:
                 self.current_data[name] = sensor_obj.temperature
-                self._logger.info("%s: %s" % (name, self.current_data[name]))
+                # self._logger.info("%s: %s" % (name, self.current_data[name]))
             except Exception as error:
-                self._logger.info("exception: %s" % error.args[0])
+                self._logger.debug("exception: %s" % error.args[0])
 
     def startTimer(self):
         # interval = self._settings.get_float(["interval"])
