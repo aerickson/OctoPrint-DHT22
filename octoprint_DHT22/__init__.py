@@ -137,6 +137,8 @@ class Dht22Plugin(
                 type="github_commit",
                 user="aerickson",
                 repo="OctoPrint-DHT22",
+                branch='master',
+                pip="https://github.com/aerickson/OctoPrint-DHT22/archive/{target}.zip",
                 current=self._plugin_version,
             )
         )
