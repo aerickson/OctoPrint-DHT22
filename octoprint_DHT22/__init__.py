@@ -111,11 +111,6 @@ class Dht22Plugin(
         self.timer = octoprint.util.RepeatedTimer(interval, self.doWork, run_first=True)
         self.timer.start()
 
-    def get_settings_defaults(self):
-        return dict(
-            # put your plugin's default settings here
-        )
-
     ##~~ AssetPlugin mixin
 
     # def get_assets(self):
