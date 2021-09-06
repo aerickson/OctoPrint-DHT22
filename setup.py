@@ -14,7 +14,7 @@ plugin_package = "octoprint_DHT22"
 plugin_name = "OctoPrint-DHT22"
 
 # The plugin's version. Can be overwritten within OctoPrint's internal data via __plugin_version__ in the plugin module
-plugin_version = "0.1.6"
+plugin_version = "0.1.7"
 
 # The plugin's description. Can be overwritten within OctoPrint's internal data via __plugin_description__ in the plugin
 # module
@@ -33,7 +33,9 @@ plugin_url = "https://github.com/aerickson/OctoPrint-DHT22"
 plugin_license = "AGPLv3"
 
 # Any additional requirements besides OctoPrint should be listed here
-plugin_requires = ["adafruit-circuitpython-dht"]
+plugin_requires = ["adafruit-circuitpython-dht>=3.6.1", 
+	# below are installed as deps of above, but we'd like to make sure they get updated
+	"adafruit-blinka>=6.13.0", "adafruit-platformdetect>=3.15.3"]
 
 ### --------------------------------------------------------------------------------------------------------------------
 ### More advanced options that you usually shouldn't have to touch follow after this point
