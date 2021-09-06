@@ -13,6 +13,10 @@ or manually using this URL:
 
     https://github.com/aerickson/OctoPrint-DHT22/archive/master.zip
 
+## Graphing
+
+Install https://github.com/jneilliii/OctoPrint-PlotlyTempGraph to display the data.
+
 ## Configuration
 
-**TODO:** Describe your plugin's configuration options (if any).
+**TODO:** Pin configuration is hard-coded currently.
