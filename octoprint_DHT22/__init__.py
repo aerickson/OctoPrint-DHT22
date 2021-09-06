@@ -5,6 +5,7 @@ import logging
 import random
 
 import adafruit_dht
+import board
 import pprint
 
 import octoprint.plugin
@@ -45,7 +46,9 @@ class Dht22Plugin(
         self.timer = None
 
         for name, pin in self.sensors.items():
-            self.sensor_objects[name] = adafruit_dht.DHT22(pin)
+            # get the board object for the pin passed in
+            board_pin = eval('board.D' + str(pin))
+            self.sensor_objects[name] = adafruit_dht.DHT22(board_pin, use_pulseio=False)
             # self._logger.info(self.sensor_objects[name])
         # self._logger.info("on_after_startup: %s" % pprint.pformat(self._settings))
         self._logger.info("on_after_startup: debugging_enabled: %s" % self._settings.get_boolean(["debugging_enabled"]))
