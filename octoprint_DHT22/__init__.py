@@ -16,21 +16,7 @@ class Dht22Plugin(
     octoprint.plugin.StartupPlugin,
     octoprint.plugin.TemplatePlugin,     
     octoprint.plugin.SettingsPlugin,
-    # octoprint.plugin.AssetPlugin,
 ):
-    # def __init__(self):
-    #     # TODO: declare stuff here, set to empty
-    #     pass
-
-    # def initialize(self):
-    #     # TODO: do more advanced setup stuff
-    #     # self._console_logger = logging.getLogger("octoprint.plugins.pluginmanager.console")
-
-    #     # self._logger.info("initialize: debugging_enabled: %s" % self._settings.get_boolean(["debugging_enabled"]))
-    #     # self._logger.info("initialize: pin_configuration: %s" % self._settings.get(["pin_configuration"]))
-    #     pass
-
-    ##~~ StartupPlugin mixin
 
     def on_after_startup(self):
         self._logger.info("in on_after_startup")
@@ -113,13 +99,6 @@ class Dht22Plugin(
         # )
         self.timer = octoprint.util.RepeatedTimer(interval, self.doWork, run_first=True)
         self.timer.start()
-
-    ##~~ AssetPlugin mixin
-
-    # def get_assets(self):
-    #     # Define your plugin's asset files to automatically include in the
-    #     # core UI here.
-    #     return dict(js=["js/DHT22.js"], css=["css/DHT22.css"], less=["less/DHT22.less"])
 
     ##~~ Softwareupdate hook
 
