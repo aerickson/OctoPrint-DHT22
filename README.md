@@ -1,6 +1,6 @@
-# OctoPrint-DHT22
+*DEPRECATED: Please use a different sensor. I never got this to work well. Please see https://github.com/aerickson/OctoPrint-HTU31.*
 
-DEPRECATED: Please use a different sensor. I never got this to work well. Please see https://github.com/aerickson/OctoPrint-HTU31.
+# OctoPrint-DHT22
 
 Reads DHT22 sensors and adds the data to OctoPrint's temperature data.
 
